@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -22,12 +22,12 @@ spec:
         app: currency-conversion
     spec:
       containers:
-      - image: in28min/currency-conversion:0.0.2-RELEASE #CHANGE
+      - image: shethwala/currency-conversion:0.0.2-RELEASE #CHANGE
         imagePullPolicy: IfNotPresent
         name: currency-conversion
         env:
           - name: CURRENCY_EXCHANGE_URI
-            value: http://currency-exchange
+            value: http://currency-exchange # This value will check the Kubernetes DNS and get correct URL
 #          - name: SPRING_PROFILES_ACTIVE
 #            value: kubernetes
       restartPolicy: Always
@@ -49,4 +49,5 @@ spec:
   selector:
     app: currency-conversion
   sessionAffinity: None #CHANGE
-  type: LoadBalancer
+  type: NodePort # Use this if using Ingress as the gateway
+  #type: LoadBalancer

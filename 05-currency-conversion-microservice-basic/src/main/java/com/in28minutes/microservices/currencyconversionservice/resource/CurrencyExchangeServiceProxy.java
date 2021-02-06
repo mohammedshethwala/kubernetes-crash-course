@@ -4,6 +4,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+// The "CURRENCY_EXCHANGE_SERVICE_HOST" is the env variable which is automatically injected by Kubernetes 
+// at the startup of this application.
 @FeignClient(name = "currency-exchange", url = "${CURRENCY_EXCHANGE_URI:http://localhost}:8000")//
 //@FeignClient(name = "currency-exchange", url = "${CURRENCY_EXCHANGE_SERVICE_HOST:http://localhost}:8000")
 //@FeignClient(name = "currency-exchange-service")//Kubernetes Service Name
